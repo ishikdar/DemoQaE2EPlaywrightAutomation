@@ -19,7 +19,7 @@ export class TextBoxPage {
         this.fullNameInput = page.getByRole('textbox', {name: 'Full Name'});
         this.emailInput = page.getByPlaceholder('name@example.com');
         this.currentAddressInput = page.getByRole('textbox', {name: 'Current Address'});
-        this.permanentAddressInput = page.getByRole('textbox', {name: 'Permanent Address'});
+        this.permanentAddressInput = page.locator('#permanentAddress');
         this.submitButton = page.getByRole('button', {name: 'Submit'});
 
         //initialize assertion elements
