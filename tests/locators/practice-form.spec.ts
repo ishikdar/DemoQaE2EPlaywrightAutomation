@@ -19,12 +19,13 @@ test.describe('Practice Form Page', () => {
         
         await practiceFormPage.dateOfBirthInput.click();
         await practiceFormPage.dateOfBirthInput.fill('01 Feb 1996');
+        await page.keyboard.press('Escape');
 
         await practiceFormPage.subjectsInput.fill('Computer Science');
-        await practiceFormPage.subjectsInput.press('Enter');
+        await practiceFormPage.subjectsInput.press('Tab');
 
-        await practiceFormPage.hobbiesCheckBoxSports.check();
-        await practiceFormPage.hobbiesCheckBoxReading.check();
+        await practiceFormPage.hobbiesCheckBoxSports.click();
+        await practiceFormPage.hobbiesCheckBoxReading.click();
 
         await practiceFormPage.pictureUploadInput.setInputFiles('tests/fixtures/sample-picture.png');
         await practiceFormPage.currentAddressInput.fill('123 Main St, City, Country');

@@ -43,12 +43,16 @@ test.describe('TextBox Page', () => {
 
     });
 
-    test.afterEach(async ({ page }) => { 
+    test.afterEach(async ({ page }, testInfo) => {
         //take screenshot after each test
-        await page.screenshot({ path: `tests/fixtures/screenshot-${Date.now()}.png` });
+        if (testInfo.status !== 'passed') {
+            await page.screenshot({ path: `tests/fixtures/screenshot-${Date.now()}.png` });
+
+        }
+
     });
 
-    test.afterAll(async () => { 
+    test.afterAll(async () => {
         console.log('Textbox test finished and ran once');
     });
 })

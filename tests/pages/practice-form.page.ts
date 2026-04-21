@@ -34,8 +34,8 @@ export class PracticeFormPage {
         this.dateOfBirthInput = page.locator('#dateOfBirthInput');
         this.subjectsInput = page.locator('#subjectsInput');
 
-        this.hobbiesCheckBoxSports = page.getByRole('checkbox', {name: 'Sports'});
-        this.hobbiesCheckBoxReading = page.getByRole('checkbox', {name: 'Reading'});
+        this.hobbiesCheckBoxSports = page.getByText('Sports');
+        this.hobbiesCheckBoxReading = page.getByText('Reading');
 
         this.pictureUploadInput = page.locator('#uploadPicture');
         this.currentAddressInput = page.getByRole('textbox', {name: 'Current Address'});
