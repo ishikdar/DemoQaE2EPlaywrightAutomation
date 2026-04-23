@@ -14,9 +14,6 @@ export class CheckBoxPage {
     readonly documentsCheckBox: Locator;
     readonly downloadsCheckBox: Locator;
 
-    //assertion elements
-    readonly outputAssertion: Locator;
-
     //initialize locators in the constructor
     constructor(page:Page){
         this.checkBoxPageVar = page;
@@ -29,9 +26,6 @@ export class CheckBoxPage {
         this.desktopCheckBox = page.getByRole('checkbox', {name: 'Desktop'});
         this.documentsCheckBox = page.getByRole('checkbox', {name: 'Documents'});
         this.downloadsCheckBox = page.getByRole('checkbox', {name: 'Downloads'});
-
-        //initialize assertion elements
-        this.outputAssertion = page.getByText('You have selected')
     }
 
     async goToCheckBoxPage(){

@@ -7,17 +7,12 @@ export class RadioButtonPage {
     readonly yesRadioButton: Locator;
     readonly impressiveRadioButton: Locator;
 
-    //assertion elements
-    readonly outputAssertion: Locator;
-
     //initialize locators in the constructor
     constructor(page: Page) {
         this.radioButtonPageVar = page;
         this.yesRadioButton = page.getByLabel('Yes');
         this.impressiveRadioButton = page.getByLabel('Impressive');
 
-        //initialize assertion elements
-        this.outputAssertion = page.getByText('You have selected')
 
     }
 

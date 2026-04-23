@@ -1,14 +1,8 @@
-import {test, expect} from '@playwright/test';
-import {CheckBoxPage} from '../pages/checkbox.page';
+import {checkBoxFixture, expect} from '../fixtures/fixture.ts';
 
-test.describe('CheckBox Page', () => {
-    test('Import POM from checkbox.page.ts', async ({page}) => {
+checkBoxFixture.describe('CheckBox Page', () => {
+    checkBoxFixture('Import POM from checkbox.page.ts', async ({checkBoxPage, page}) => {
 
-        //create an object of the page class
-        const checkBoxPage = new CheckBoxPage(page);
-
-        //navigate to the page
-        await checkBoxPage.goToCheckBoxPage();
         
         //expand all folders
         await checkBoxPage.homePlusIcon.click();
@@ -22,7 +16,7 @@ test.describe('CheckBox Page', () => {
         await checkBoxPage.downloadsCheckBox.check();
 
         //assert the output
-        await expect(checkBoxPage.outputAssertion).toBeVisible();
+        await expect(page.getByText('You have selected')).toBeVisible();
 
     });
 });

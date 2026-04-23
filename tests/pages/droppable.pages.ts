@@ -7,18 +7,12 @@ export class DroppablePage{
     readonly simpleDraggable: Locator;
     readonly simpleDroppable: Locator;
 
-    //assertion elements
-    readonly droppableAssertionText: Locator;
-
     constructor(page: Page) {
         this.droppablePageVar = page;
 
         //simple droppable locators
         this.simpleDraggable = page.getByText('Drag me!', {exact: true});
         this.simpleDroppable = page.getByText('Drag the small box here.', {exact: true});
-
-        //assertion elements
-        this.droppableAssertionText = page.getByText('Success!', {exact: true});
     }
 
     async goToDroppablePage(){

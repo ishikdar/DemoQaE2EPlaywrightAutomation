@@ -1,4 +1,4 @@
-import {type Locator, Page} from '@playwright/test';
+import { type Locator, Page } from '@playwright/test';
 
 export class PracticeFormPage {
     private readonly practiceFormPageVar: Page;
@@ -19,17 +19,13 @@ export class PracticeFormPage {
     readonly cityDropdown: Locator;
     readonly submitButton: Locator;
 
-    //assertion elements
-    readonly thankYouMessage: Locator;
-
-
     //initialize locators in the constructor
-    constructor(page:Page){
+    constructor(page: Page) {
         this.practiceFormPageVar = page;
         this.firstNameInput = page.getByPlaceholder('First Name');
         this.lastNameInput = page.getByPlaceholder('Last Name');
         this.emailInput = page.getByPlaceholder('name@example.com');
-        this.genderRadioButton = page.getByRole('radio', {name: 'Male',exact: true});
+        this.genderRadioButton = page.getByRole('radio', { name: 'Male', exact: true });
         this.mobileNumberInput = page.getByPlaceholder('Mobile Number');
         this.dateOfBirthInput = page.locator('#dateOfBirthInput');
         this.subjectsInput = page.locator('#subjectsInput');
@@ -38,23 +34,48 @@ export class PracticeFormPage {
         this.hobbiesCheckBoxReading = page.getByText('Reading');
 
         this.pictureUploadInput = page.locator('#uploadPicture');
-        this.currentAddressInput = page.getByRole('textbox', {name: 'Current Address'});
+        this.currentAddressInput = page.getByRole('textbox', { name: 'Current Address' });
 
         this.stateDropdown = page.locator('#state');
         this.cityDropdown = page.locator('#city');
-        this.submitButton = page.getByRole('button', {name: 'Submit'});
-
-
-        //initialize assertion elements
-        this.thankYouMessage = page.getByText('Thanks for submitting the form');
+        this.submitButton = page.getByRole('button', { name: 'Submit' });
 
     }
 
-    async goToPracticeFormPage(){
+    async goToPracticeFormPage() {
         await this.practiceFormPageVar.goto('https://demoqa.com/automation-practice-form');
     }
 
-    async closePopup(){
-        await this.practiceFormPageVar.mouse.click(0,0);
+    async fillUpTheForm(firstName: string, lastName: string, email: string, mobileNumber: string, dateOfBirth: string, subjects: string[], hobbiesCheckBoxSports: string, hobbiesCheckBoxReading: string, pictureUploadInput: string, currentAddressInput: string, state: string, city: string) {
+        await this.firstNameInput.fill(firstName);
+        await this.lastNameInput.fill(lastName);
+        await this.emailInput.fill(email);
+        await this.genderRadioButton.check();
+        await this.mobileNumberInput.fill(mobileNumber);
+        await this.dateOfBirthInput.click();
+        await this.dateOfBirthInput.fill(dateOfBirth);
+        await this.practiceFormPageVar.keyboard.press('Escape');
+
+        for (const subject of subjects) {
+            await this.subjectsInput.fill(subject);
+            await this.subjectsInput.press('Tab');
+        }
+
+        await this.hobbiesCheckBoxSports.click();
+        await this.hobbiesCheckBoxReading.click();
+
+        await this.pictureUploadInput.setInputFiles(pictureUploadInput);
+        await this.currentAddressInput.fill(currentAddressInput);
+
+        await this.stateDropdown.click();
+        await this.stateDropdown.getByText(state, { exact: true }).click();
+        await this.cityDropdown.click();
+        await this.cityDropdown.getByText(city, { exact: true }).click();
+
+        await this.submitButton.click();
+    }
+
+    async closePopup() {
+        await this.practiceFormPageVar.mouse.click(0, 0);
     }
 }

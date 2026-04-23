@@ -1,13 +1,8 @@
-import { expect, test } from '@playwright/test';
-import { WebTablesPage } from '../pages/web-tables.page';
+import {webTablesFixture,expect} from '../fixtures/fixture.ts';
 
-test.describe('Web Tables Page', () => {
-    test('Import POM from web-tables.page.ts', async ({ page }) => {
-        //create an object of the page class
-        const webTablesPage = new WebTablesPage(page);
+webTablesFixture.describe('Web Tables Page', () => {
+    webTablesFixture('Import POM from web-tables.page.ts', async ({ webTablesPage, page }) => {
 
-        //navigate to the page
-        await webTablesPage.goToWebTablesPage();
 
         //add 10 new record
 
