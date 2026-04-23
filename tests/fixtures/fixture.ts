@@ -19,7 +19,7 @@ export const testWithFixture = baseForTextBoxPage.extend<Fixture>({
             await page.screenshot({ path: `tests/screenshots/screenshot-${Date.now()}.png` });
 
         } else {
-            console.log('Test passed, no screenshot taken');
+            console.log('Test passed, no screenshot taken!');
         }
 
     }
