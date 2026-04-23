@@ -9,22 +9,14 @@ testWithFixture.describe('TextBox Page', () => {
     });
 
 
-    testWithFixture('fill up the form and submit', async ({ textBoxPage }) => {
-
-        //input some value
-        await textBoxPage.fullNameInput.fill('Md Al Imran Shikdar')
-        await textBoxPage.emailInput.fill('mdalimranshikdar@example.com');
-        await textBoxPage.currentAddressInput.fill('123 Main St, City, Country');
-        await textBoxPage.permanentAddressInput.fill('456 Another St, City, Country');
-
-        //submit the form
-        await textBoxPage.submitButton.click();
+    testWithFixture('fill up the form and submit', async ({ textBoxPage, page }) => {
+        //form fill up
+        await textBoxPage.fillUpTheForm('Md Al Imran Shikdar', 'mdalimranshikdar@example.com', '123 Main St, City, Country', '456 Another St, City, Country');
 
         //assert the values
-        await expect(textBoxPage.nameAssertion).toHaveText('Name:Md Al Imran Shikdar');
+        await expect(page.locator('#name')).toHaveText('Name:Md Al Imran Shikdar');
 
     });
-
 
     testWithFixture.afterAll(async () => {
         console.log('Textbox test finished and ran once');

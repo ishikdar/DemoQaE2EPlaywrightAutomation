@@ -10,8 +10,6 @@ export class TextBoxPage {
     readonly permanentAddressInput: Locator;
     readonly submitButton: Locator;
 
-    //assertion elements
-    readonly nameAssertion: Locator;
 
     //initialize locators in the constructor
     constructor(page:Page){
@@ -22,12 +20,18 @@ export class TextBoxPage {
         this.permanentAddressInput = page.locator('#permanentAddress');
         this.submitButton = page.getByRole('button', {name: 'Submit'});
 
-        //initialize assertion elements
-        this.nameAssertion = page.locator('#name');
     }
 
     async goToTextBoxPage(){
         await this.textBoxPageVar.goto('https://demoqa.com/text-box');
+    }
+
+    async fillUpTheForm(fullName: string, email: string, currentAddress: string, permanentAddress: string){
+        await this.fullNameInput.fill(fullName);
+        await this.emailInput.fill(email);
+        await this.currentAddressInput.fill(currentAddress);
+        await this.permanentAddressInput.fill(permanentAddress);
+        await this.submitButton.click();
     }
 
 
