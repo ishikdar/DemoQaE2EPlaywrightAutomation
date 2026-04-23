@@ -1,33 +1,15 @@
-import { test, expect } from '@playwright/test';
-import { TextBoxPage } from '../pages/text-box.page';
+import { testWithFixture, expect } from '../fixtures/fixture.ts';
 
-test.describe('TextBox Page', () => {
-
-    let textBoxPage: TextBoxPage;
+testWithFixture.describe('TextBox Page', () => {
 
     //this will be executed once before all the tests
-    test.beforeAll(async () => {
+    testWithFixture.beforeAll(async () => {
         console.log('Textbox test started and ran once before all tests');
 
     });
 
-    //before each test, we will navigate to the page
-    test.beforeEach(async ({ page }) => {
-        textBoxPage = new TextBoxPage(page);
-        await textBoxPage.goToTextBoxPage();
-    });
 
-    //this test will check if all the fields are visible or not
-    test('check all the fields are visible or not', async ({ page }) => {
-        await expect(textBoxPage.fullNameInput).toBeVisible();
-        await expect(textBoxPage.emailInput).toBeVisible();
-        await expect(textBoxPage.currentAddressInput).toBeVisible();
-        await expect(textBoxPage.permanentAddressInput).toBeVisible();
-        await expect(textBoxPage.submitButton).toBeVisible();
-
-    });
-
-    test('fill up the form and submit', async ({ page }) => {
+    testWithFixture('fill up the form and submit', async ({ textBoxPage }) => {
 
         //input some value
         await textBoxPage.fullNameInput.fill('Md Al Imran Shikdar')
@@ -43,16 +25,8 @@ test.describe('TextBox Page', () => {
 
     });
 
-    test.afterEach(async ({ page }, testInfo) => {
-        //take screenshot after each test
-        if (testInfo.status !== 'passed') {
-            await page.screenshot({ path: `tests/fixtures/screenshot-${Date.now()}.png` });
 
-        }
-
-    });
-
-    test.afterAll(async () => {
+    testWithFixture.afterAll(async () => {
         console.log('Textbox test finished and ran once');
     });
 })

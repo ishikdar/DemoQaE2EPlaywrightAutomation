@@ -27,7 +27,7 @@ test.describe('Practice Form Page', () => {
         await practiceFormPage.hobbiesCheckBoxSports.click();
         await practiceFormPage.hobbiesCheckBoxReading.click();
 
-        await practiceFormPage.pictureUploadInput.setInputFiles('tests/fixtures/sample-picture.png');
+        await practiceFormPage.pictureUploadInput.setInputFiles('tests/test_data/sample-picture.png');
         await practiceFormPage.currentAddressInput.fill('123 Main St, City, Country');
 
         await practiceFormPage.stateDropdown.click();
