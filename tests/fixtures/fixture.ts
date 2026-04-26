@@ -9,6 +9,7 @@ import { RadioButtonPage } from "../pages/radio-button.page";
 import { WebTablesPage } from '../pages/web-tables.page';
 import { IframePage } from '../pages/iframe.pages';
 import {AlertsPage} from '../pages/alerts.pages';
+import {NewTabPage} from '../pages/new-tab.pages';
 
 type Fixture = {
     textBoxPage: TextBoxPage;
@@ -21,6 +22,7 @@ type Fixture = {
     webTablesPage: WebTablesPage;
     iframePage: IframePage;
     alertsPage: AlertsPage;
+    newTabPage: NewTabPage;
 }
 
 // this fixture is only for text-box page/spec related
@@ -220,6 +222,26 @@ export const alertsFixture = test.extend<Fixture>({
             await page.screenshot({ path: `tests/screenshots/screenshot-${Date.now()}.png` });
         } else {
             console.log('Test passed, no screenshot taken for alerts page!');
+        }
+    }
+});
+
+
+// this fixture is only for new tab page/spec related
+export const newTabFixture = test.extend<Fixture>({
+    newTabPage: async ({ page }, use, testInfo) => {
+        const newTabPage = new NewTabPage(page);
+        //navigate to the page before each test
+        await newTabPage.goToNewTabPage();
+        console.log('Fixture setup: Navigated to New Tab page');
+
+        await use(newTabPage);
+
+        //take screenshot if the test failed
+        if (testInfo.status !== 'passed') {
+            await page.screenshot({ path: `tests/screenshots/screenshot-${Date.now()}.png` });
+        } else {
+            console.log('Test passed, no screenshot taken for new tab page!');
         }
     }
 });
