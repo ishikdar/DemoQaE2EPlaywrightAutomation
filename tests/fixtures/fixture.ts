@@ -8,6 +8,7 @@ import { PracticeFormPage } from '../pages/practice-form.page';
 import { RadioButtonPage } from "../pages/radio-button.page";
 import { WebTablesPage } from '../pages/web-tables.page';
 import { IframePage } from '../pages/iframe.pages';
+import {AlertsPage} from '../pages/alerts.pages';
 
 type Fixture = {
     textBoxPage: TextBoxPage;
@@ -19,6 +20,7 @@ type Fixture = {
     radioButtonPage: RadioButtonPage;
     webTablesPage: WebTablesPage;
     iframePage: IframePage;
+    alertsPage: AlertsPage;
 }
 
 // this fixture is only for text-box page/spec related
@@ -198,6 +200,26 @@ export const iframeFixture = test.extend<Fixture>({
             await page.screenshot({ path: `tests/screenshots/screenshot-${Date.now()}.png` });
         } else {
             console.log('Test passed, no screenshot taken for iframe page!');
+        }
+    }
+});
+
+
+// this fixture is only for alerts page/spec related
+export const alertsFixture = test.extend<Fixture>({
+    alertsPage: async ({ page }, use, testInfo) => {
+        const alertsPage = new AlertsPage(page);
+        //navigate to the page before each test
+        await alertsPage.goToAlertsPage();
+        console.log('Fixture setup: Navigated to Alerts page');
+
+        await use(alertsPage);
+
+        //take screenshot if the test failed
+        if (testInfo.status !== 'passed') {
+            await page.screenshot({ path: `tests/screenshots/screenshot-${Date.now()}.png` });
+        } else {
+            console.log('Test passed, no screenshot taken for alerts page!');
         }
     }
 });
