@@ -12,3 +12,6 @@ node_modules/
 
 # Test screenshots
 tests/screenshots/screenshot-*.png
+
+# .env files
+.env
