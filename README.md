@@ -21,6 +21,16 @@ npm install
 npx playwright install
 ```
 
+### Environment Variables
+
+Create a `.env` file in the project root for API test configuration:
+
+```bash
+REQRES_API_KEY=your_api_key_here
+```
+
+Get your free API key from [reqres.in](https://reqres.in/). The `.env` file is gitignored and will not be committed.
+
 ## Running Tests
 
 ```bash
@@ -53,7 +63,7 @@ npx playwright show-report
 
 ```
 ├── tests/
-│   ├── locators/                    # Test spec files
+│   ├── e2e_test/                    # Test spec files
 │   │   ├── text-box.spec.ts        # Text box form tests
 │   │   ├── checkbox.spec.ts        # Checkbox tree tests
 │   │   ├── radio-button.spec.ts    # Radio button tests
@@ -61,7 +71,11 @@ npx playwright show-report
 │   │   ├── web-tables.spec.ts      # Table CRUD + pagination tests
 │   │   ├── practice-form.spec.ts   # Full form submission tests
 │   │   ├── droppable.spec.ts       # Drag and drop tests
-│   │   └── hover.spec.ts           # Hover menu tests
+│   │   ├── hover.spec.ts           # Hover menu tests
+│   │   ├── iframe.spec.ts          # iFrame interaction tests
+│   │   ├── alerts.spec.ts          # Alert, confirm, prompt dialog tests
+│   │   ├── new-tab.spec.ts         # New tab/window handling tests
+│   │   └── api-test.spec.ts        # API testing (GET, POST, PUT, DELETE)
 │   ├── pages/                       # Page Object Model classes
 │   │   ├── text-box.page.ts
 │   │   ├── checkbox.page.ts
@@ -70,9 +84,15 @@ npx playwright show-report
 │   │   ├── web-tables.page.ts
 │   │   ├── practice-form.page.ts
 │   │   ├── droppable.pages.ts
-│   │   └── hover.pages.ts
-│   └── fixtures/                    # Test data files
+│   │   ├── hover.pages.ts
+│   │   ├── iframe.pages.ts
+│   │   ├── alerts.pages.ts
+│   │   └── new-tab.pages.ts
+│   ├── fixtures/                    # Custom Playwright fixtures
+│   │   └── fixture.ts              # Extended test fixtures for all pages
+│   └── test_data/                   # Test data files
 │       └── sample-picture.png
+├── .env                             # API keys (gitignored)
 ├── playwright.config.ts             # Playwright configuration
 ├── package.json
 └── README.md
@@ -121,9 +141,24 @@ npx playwright show-report
 | Practice Form | demoqa.com/automation-practice-form | Full form with all input types |
 | Droppable | commitquality.com/practice-drag-and-drop | Drag and drop |
 | Menu | demoqa.com/menu | Hover navigation, nested submenus |
+| iFrame | commitquality.com/practice-iframe | Interacting with elements inside iframes |
+| Alerts | demoqa.com/alerts | Simple, delayed, confirm, and prompt dialogs |
+| New Tab | demoqa.com/browser-windows | Opening and verifying new tab content |
+
+### API Testing
+- GET, POST, PUT, DELETE requests using Playwright's `request` fixture
+- Tested against [reqres.in](https://reqres.in/) API
+- API key loaded from `.env` using `dotenv`
+- Response status code and body assertions
+
+### Fixtures
+- Custom `test.extend()` fixtures for each page object
+- Auto-navigation to page URL before each test
+- Screenshot on failure in fixture teardown
 
 ## Tech Stack
 
 - **Playwright Test** — test runner and browser automation
 - **TypeScript** — type-safe test code
+- **dotenv** — environment variable management for API keys
 - **Chromium** — primary test browser (Firefox and WebKit available in config)
