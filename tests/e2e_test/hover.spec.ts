@@ -11,7 +11,6 @@ hoverFixture.describe('Hover Page', () => {
 
 
         //hover to the sub sub list button
-        await hoverPage.subSubListButton.waitFor({ state: 'visible' });
         await hoverPage.subSubListButton.hover();
 
         //assert the sub sub list items are visible
