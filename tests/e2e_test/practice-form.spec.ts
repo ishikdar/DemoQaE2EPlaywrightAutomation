@@ -1,7 +1,7 @@
 import {practiceFormFixture, expect} from '../fixtures/fixture.ts';
 
 practiceFormFixture.describe('Practice Form Page', () => {
-    practiceFormFixture('Import POM from practice-form.page.ts', async ({practiceFormPage, page}) => {
+    practiceFormFixture('should be able to fill up practice form', async ({practiceFormPage, page}) => {
 
         await practiceFormPage.fillUpTheForm(
             'Md Al Imran','Shikdar','imran@example.com','1234567890','01 Feb 1996',['Computer Science'],

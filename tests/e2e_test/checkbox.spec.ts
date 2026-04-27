@@ -1,7 +1,7 @@
 import {checkBoxFixture, expect} from '../fixtures/fixture.ts';
 
 checkBoxFixture.describe('CheckBox Page', () => {
-    checkBoxFixture('Import POM from checkbox.page.ts', async ({checkBoxPage, page}) => {
+    checkBoxFixture('should handle checkbox tests properly', async ({checkBoxPage, page}) => {
 
         
         //expand all folders

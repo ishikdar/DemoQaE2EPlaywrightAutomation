@@ -1,7 +1,7 @@
 import {hoverFixture, expect} from '../fixtures/fixture.ts';
 
 hoverFixture.describe('Hover Page', () => {
-    hoverFixture('Import POM from hover.pages.ts', async ({hoverPage}) => {
+    hoverFixture('should show hover item properly', async ({hoverPage}) => {
 
         //hover to the second menu item
         await hoverPage.menuItem2.hover();

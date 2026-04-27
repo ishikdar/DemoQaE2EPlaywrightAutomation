@@ -14,6 +14,14 @@ dotenv.config();
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+
+  //reporter
+  reporter: [
+    ['list'],
+    ['html', { outputFolder: 'playwright-report', open: 'never' }],
+  ],
+
+
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,

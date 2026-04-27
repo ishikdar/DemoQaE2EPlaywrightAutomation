@@ -1,7 +1,7 @@
 import {buttonsFixture, expect} from '../fixtures/fixture.ts';
 
 buttonsFixture.describe('Buttons Page', () => {
-    buttonsFixture('Import POM from buttons.page.ts', async ({buttonsPage, page}) => {
+    buttonsFixture('should handle button clicks properly', async ({buttonsPage, page}) => {
 
 
         //double click the button
