@@ -93,6 +93,9 @@ npx playwright show-report
 │   └── test_data/                   # Test data files
 │       └── sample-picture.png
 ├── .env                             # API keys (gitignored)
+├── .github/
+│   └── workflows/
+│       └── playwright.yml           # GitHub Actions CI/CD pipeline
 ├── playwright.config.ts             # Playwright configuration
 ├── package.json
 └── README.md
@@ -156,9 +159,30 @@ npx playwright show-report
 - Auto-navigation to page URL before each test
 - Screenshot on failure in fixture teardown
 
+### CI/CD
+- **GitHub Actions** workflow runs all tests on every push and pull request to `main`
+- Runs on `ubuntu-latest` with Node.js 20
+- Installs dependencies, Playwright browsers, and creates `.env` from GitHub Secrets
+- Uploads HTML test report as an artifact (retained for 7 days)
+- Headless mode automatically enabled on CI via `playwright.config.ts`
+
+## CI/CD Setup
+
+Tests run automatically via GitHub Actions on push/PR to `main`.
+
+To set up:
+1. Go to your GitHub repo → **Settings** → **Secrets and variables** → **Actions**
+2. Add a new repository secret: `REQRES_API_KEY` with your API key
+3. Push to `main` — the workflow will trigger automatically
+
+View test results: Go to **Actions** tab → select the run → download the `playwright-report` artifact.
+
 ## Tech Stack
 
 - **Playwright Test** — test runner and browser automation
 - **TypeScript** — type-safe test code
 - **dotenv** — environment variable management for API keys
+- **GitHub Actions** — CI/CD pipeline
 - **Chromium** — primary test browser (Firefox and WebKit available in config)
+
+## Built with ❤️ by Imran
